@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
+const Page = async () => {
+  
 
-const Page = () => {
   return (
     <div className="">
-        <Button variant={"new"}> 
-            Hello World!
-        </Button>
+        Hello world!
     </div>
   )
 }
