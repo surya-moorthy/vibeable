@@ -2,17 +2,25 @@
 
 import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+
+
 const Page = () => {
+  
   const trpc = useTRPC();
-  const {data} = useQuery(trpc.createAI.queryOptions({
-    text: "Antonio"
-  }))
+  const invoke = useMutation(trpc.invoke.mutationOptions({
+    onSuccess: () => {
+      toast.success("Background job started")
+    }
+  }));
 
   return (
-    <div className="">
-       {JSON.stringify(data)}
-    </div>
+   <div className="p-4 max-w-7xl mx-auto">
+     <Button onClick={()=> {invoke.mutate({ text : "John"})}}>
+      Invoke background job 
+     </Button>
+   </div> 
   )
 }
 
